@@ -9,13 +9,17 @@ import java.net.URL;
 
 public class EverShopTest {
     private WebDriver driver;
+    private String baseUrl;
 
     @Before
     public void setup() throws MalformedURLException {
         FirefoxOptions options = new FirefoxOptions();
 
-        this.driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
+        String gridUrl = ConfigReader.getProperty("gridUrl");
+        this.driver = new RemoteWebDriver(new URL(gridUrl), options);
         this.driver.manage().window().maximize();
+
+        this.baseUrl = ConfigReader.getProperty("baseUrl");
     }
 
     @Test
@@ -23,9 +27,7 @@ public class EverShopTest {
         AccessoriesPage accessoriesPage = new AccessoriesPage(this.driver);
         LoginPage loginPage = new LoginPage(this.driver);
 
-        String base = ConfigReader.getProperty("baseUrl");
-
-        this.driver.get(base + "/accessories");
+        this.driver.get(this.baseUrl + "/accessories");
 
         String pageTitle = this.driver.getTitle();
         System.out.println("The page title is: " + pageTitle);
@@ -40,7 +42,16 @@ public class EverShopTest {
 
         loginPage.login(testEmail, testPassword);
     }
+    @Test
+    public void testRegistrationWithRandomData() {
+        RegistrationPage registrationPage = new RegistrationPage(this.driver);
 
+        this.driver.get(this.baseUrl + "/account/register");
+
+        String randomEmail = "user" + System.currentTimeMillis() + "@test.com";
+
+        registrationPage.fillRegistrationForm("Test User", randomEmail, "SecurePass123!");
+    }
     @After
     public void close() {
         if (this.driver != null) {

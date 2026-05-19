@@ -65,11 +65,11 @@ basic:
     description: "Log out from the application and verify it"
 
   fill_input:                # 1 pt each | repeatable | max 10
-    count: 2
+    count: 5
     description: "Fill an input field (text, radio, checkbox, date, etc.) — each different type counts as one"
 
   send_form:                 # 1 pt each | repeatable | max 10
-    count: 1
+    count: 2
     description: "Submit a form (each distinct form counts as one)"
 
   static_page_test:          # 2 pts | once
@@ -81,7 +81,7 @@ basic:
     description: "Define an array of URLs or page data, iterate over them and verify something on each page (e.g. check title or a specific element on 5 different pages using a loop)"
 
   complex_xpath:             # 1 pt each | repeatable | max 10
-    count: 1
+    count: 5
     description: "Use a complex XPath expression (e.g. //div[@class='content']//a[contains(@href,'profile')])"
 
   textarea:                  # 1 pt | once
@@ -102,7 +102,7 @@ basic:
     description: "Project has at least 4 Java classes"
 
   at_least_6_classes:        # 3 pts | once
-    done: false
+    done: true
     description: "Project has at least 6 Java classes (cumulative with above)"
 
   at_least_8_classes:        # 3 pts | once
@@ -175,7 +175,7 @@ advanced:
     description: "Verify an e-mail was sent (e.g. registration activation link, password reset)"
 
   random_data:               # 8 pts | once
-    done: false
+    done: true
     description: "Generate random test data (e.g. random username, email) and use it in a test"
 
   download_files:            # 12 pts | once
