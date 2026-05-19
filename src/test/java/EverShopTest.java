@@ -1,4 +1,5 @@
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -51,6 +52,22 @@ public class EverShopTest {
         String randomEmail = "user" + System.currentTimeMillis() + "@test.com";
 
         registrationPage.fillRegistrationForm("Test User", randomEmail, "SecurePass123!");
+    }
+    @Test
+    public void testHistoryNavigation() {
+        this.driver.get(this.baseUrl);
+        String homeTitle = this.driver.getTitle();
+
+        this.driver.navigate().to(this.baseUrl + "/accessories");
+        String accessoriesTitle = this.driver.getTitle();
+
+        this.driver.navigate().back();
+        System.out.println("Navigated back. Current title: " + this.driver.getTitle());
+        Assert.assertEquals("Should be back on the home page!", homeTitle, this.driver.getTitle());
+
+        this.driver.navigate().forward();
+        System.out.println("Navigated forward. Current title: " + this.driver.getTitle());
+        Assert.assertEquals("Should be forward on the accessories page!", accessoriesTitle, this.driver.getTitle());
     }
     @After
     public void close() {
